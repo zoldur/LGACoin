@@ -278,6 +278,6 @@ if (( $INSTALLED == 0 )); then
 else
  /etc/init.d/$COIN_NAME start
  echo -e "${RED}New wallet compiled and installed. Old configuration was kept intact.${NC}"
- echo -e "Old configuration folder backed up as ${RED}$CONFIGFOLDER.bkp${NC}
+ echo -e "Old configuration folder backed up as ${RED}$CONFIGFOLDER.bkp${NC}"
 fi
 
