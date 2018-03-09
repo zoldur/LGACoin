@@ -79,6 +79,10 @@ EOF
 chmod +x /etc/init.d/$COIN_NAME >/dev/null 2>&1
 update-rc.d $COIN_NAME defaults >/dev/null 2>&1
 /etc/init.d/$COIN_NAME start
+if [ "$?" -gt "0" ]; then
+ sleep 5
+ /etc/init.d/$COIN_NAME start
+fi
 }
 
 
