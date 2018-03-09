@@ -39,8 +39,8 @@ Leaguedd getinfo
 Also, if you want to start/stop **Leagued**, run one of the following commands as **root**:
 
 ```
-/etc/init.d/Leagued start #To start League service  
-/etc/init.d/Leagued stop #To stop League service
+/etc/init.d/League start #To start League service  
+/etc/init.d/League stop #To stop League service
 ```  
 ***
 
