@@ -40,7 +40,7 @@ Also, if you want to start/stop **Leagued**, run one of the following commands a
 
 ```
 /etc/init.d/Leagued start #To start League service  
-/etc/init.d/Apollon stop #To stop League service
+/etc/init.d/Leagued stop #To stop League service
 ```  
 ***
 
