@@ -9,6 +9,7 @@ COIN_REPO='https://github.com/LGACoin/League.git'
 COIN_NAME='League'
 COIN_PORT=19371
 RPC_PORT=19372
+INSTALLED=0
 
 
 NODEIP=$(curl -s4 icanhazip.com)
@@ -17,6 +18,17 @@ NODEIP=$(curl -s4 icanhazip.com)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
+
+function delete_wallet() {
+ if [ -s "$CONFIGFOLDER/$CONFIG_FILE" ]; then 
+   /etc/init.d/$COIN_NAME stop 
+   pkill $COIN_NAME >/dev/null 2>&1
+   sleep 5
+   rsync -a $CONFIGFOLDER/ $CONFIGFOLDER.bkp/ 
+   rm -r $CONFIGFOLDER/{smsgDB,txleveldb,smsg.ini,peers.dat,mncache.dat,blk0001.dat}
+   INSTALLED=1
+ fi
+}
 
 function compile_node() {
   echo -e "Prepare to compile $COIN_NAME"
@@ -176,10 +188,10 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-if [ -n "$(pidof $COIN_DAEMON)" ] || [ -e "$COIN_DAEMOM" ] ; then
-  echo -e "${RED}$COIN_NAME is already installed.${NC}"
-  exit 1
-fi
+#if [ -n "$(pidof $COIN_DAEMON)" ] || [ -e "$COIN_DAEMOM" ] ; then
+#  echo -e "${RED}$COIN_NAME is already installed.${NC}"
+#  exit 1
+#fi
 }
 
 function prepare_system() {
@@ -259,5 +271,13 @@ clear
 checks
 prepare_system
 create_swap
+delete_wallet
 compile_node
-setup_node
+if (( $INSTALLED == 0 )); then
+ setup_node
+else
+ /etc/init.d/$COIN_NAME start
+ echo -e "${RED}New wallet compiled and installed. Old configuration was kept intact.${NC}"
+ echo -e "Old configuration folder backed up as ${RED}$CONFIGFOLDER.bkp${NC}
+fi
+

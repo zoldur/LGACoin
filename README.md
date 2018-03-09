@@ -1,5 +1,5 @@
 # League Coin
-Shell script to install a [Leagued Masternode](https://league.express/) on a Linux server running **Ubuntu 14.04**. Use it on your own risk.
+Shell script to install or update a [Leagued Masternode](https://league.express/) on a Linux server running **Ubuntu 14.04**. Use it on your own risk.
 ***
 
 ## Installation
