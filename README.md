@@ -33,8 +33,8 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 
 ## Usage:
 ```
-Leaguedd masternode status  
-Leaguedd getinfo
+Leagued masternode status  
+Leagued getinfo
 ```
 Also, if you want to start/stop **Leagued**, run one of the following commands as **root**:
 
